@@ -1,14 +1,4 @@
 #!/usr/bin/env python3
-"""
-Stubber - Creates a stub python file from a python module
-
-Why such a pointless thing? The python module is itself the stub with the
-implementation, right?
-
-Wrong, if you talk about C-based modules.
-"""
-__version__ = '0.1.0'
-
 import sys
 import re
 import inspect
@@ -296,15 +286,9 @@ class StubDoc(pydoc._PlainTextDoc):
         return line
 
 
-
 def get_stubfile(target) -> str:
     return pydoc.render_doc(
         target,
         title='#!/usr/bin/env python  # [%s]',
         renderer=StubDoc(),
     )
-
-
-if __name__ == '__main__':
-    target = sys.argv[1]
-    print(get_stubfile(target))

@@ -2,8 +2,11 @@
 requires = ["flit"]
 build-backend = "flit.buildapi"
 
+[tool.flit.scripts]
+pystubber = "pystubber.cli:main"
+
 [tool.flit.metadata]
-module = "stubber"
+module = "pystubber"
 author = "Alan Justino da Silva"
 author-email = "alan.justino@yahoo.com.br"
 classifiers = [
