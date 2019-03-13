@@ -250,9 +250,14 @@ class StubDoc(pydoc._PlainTextDoc):
                     # since the syntax doesn't support but it is possible.
                     # So removing parentheses isn't truly safe.
                     argspec = argspec[1:-1] # remove parentheses
-        if not argspec:
-            argspec = '(...)'
+        if argspec:
+            dummyargs = False
+        else:
+            dummyargs = True
+            argspec = '(*args, **kwargs)'
         decl = 'def ' + title + argspec + note + ':'
+        if dummyargs:
+            decl += '  # unknown args #'
 
         impl = 'raise NotImplementedError()'
         if skipdocs:
