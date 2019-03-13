@@ -98,6 +98,7 @@ class StubDoc(pydoc._PlainTextDoc):
         if bases:
             parents = map(makename, bases)
             title = title + '(%s)' % ', '.join(parents)
+        title += ':'
 
         contents = []
         push = contents.append
