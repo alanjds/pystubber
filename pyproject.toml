@@ -7,6 +7,7 @@ pystubber = "pystubber.cli:main"
 
 [tool.flit.metadata]
 module = "pystubber"
+home-page="https://github.com/alanjds/pystubber"
 author = "Alan Justino da Silva"
 author-email = "alan.justino@yahoo.com.br"
 classifiers = [
