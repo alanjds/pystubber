@@ -4,7 +4,8 @@ import re
 import inspect
 import pydoc
 from pydoc import (getdoc, visiblename, isdata, classname, _is_bound_method,
-                   classify_class_attrs, _split_list, builtins, sort_attributes)
+                   classify_class_attrs, _split_list, builtins, sort_attributes,
+                   TextRepr)
 from collections import deque
 
 
@@ -28,8 +29,22 @@ def _get_data(object, all_=None):
             yield (key, value)
 
 
+class StubRepr(TextRepr):
+    def __init__(self):
+        super().__init__()
+        self.maxlist = self.maxtuple = 200
+        self.maxdict = 100
+        self.maxstring = self.maxother = 1000
+
+
 class StubDoc(pydoc._PlainTextDoc):
     # Extending from code in `pydoc.py` of Python 3.6.5
+
+    _repr_instance = StubRepr()
+
+    @property
+    def repr(self):
+        return self._repr_instance.repr
 
     def section(self, title, contents):
         """Format a section with a given heading."""
