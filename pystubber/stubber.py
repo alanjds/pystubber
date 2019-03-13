@@ -65,6 +65,11 @@ class StubDoc(pydoc._PlainTextDoc):
         funcs = list(_get_funcs(object, all_=all_))
         data = list(_get_data(object, all_=all_))
 
+        SPECIAL_DATA = ['__version__', '__date__', '__author__', '__credits__']
+        for special in SPECIAL_DATA:
+            if hasattr(object, special):
+                data.insert(0, (special, getattr(object, special)))
+
         if data:
             contents = []
             for key, value in data:
@@ -84,17 +89,6 @@ class StubDoc(pydoc._PlainTextDoc):
                 contents.append(self.document(value, key, name))
             result = result + self.section('\n## FUNCTIONS ##\n', '\n'.join(contents))
 
-        if hasattr(object, '__version__'):
-            version = str(object.__version__)
-            if version[:11] == '$' + 'Revision: ' and version[-1:] == '$':
-                version = version[11:-1].strip()
-            result = result + self.section('## VERSION ## ', version)
-        if hasattr(object, '__date__'):
-            result = result + self.section('## DATE ## ', str(object.__date__))
-        if hasattr(object, '__author__'):
-            result = result + self.section('## AUTHOR ##', str(object.__author__))
-        if hasattr(object, '__credits__'):
-            result = result + self.section('## CREDITS ##', str(object.__credits__))
         return result
 
     def docclass(self, object, name=None, mod=None, *ignored):
