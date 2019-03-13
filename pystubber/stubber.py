@@ -270,9 +270,12 @@ class StubDoc(pydoc._PlainTextDoc):
         else:
             dummyargs = True
             argspec = '(*args, **kwargs)'
-        decl = 'def ' + title + argspec + note + ':'
+        decl = 'def ' + title + argspec + ':'
         if dummyargs:
             decl += '  # unknown args #'
+        if note:
+            decl += f'  # {note}'
+        decl = decl.replace('#  #', '#')
 
         impl = 'raise NotImplementedError()'
         if skipdocs:
