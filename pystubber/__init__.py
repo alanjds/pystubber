@@ -6,4 +6,4 @@ implementation, right?
 
 Wrong, if you talk about C-based modules.
 """
-__version__ = '0.1.0'
+__version__ = '0.1.1'

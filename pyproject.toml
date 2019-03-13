@@ -17,3 +17,5 @@ classifiers = [
     'Programming Language :: Python :: 3',
     'Programming Language :: Python :: 3.6',
 ]
+requires-python="~=3.5"
+description-file="README.md"
